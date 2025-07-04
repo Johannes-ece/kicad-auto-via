@@ -1,0 +1,31 @@
+{
+    "$schema": "https://go.kicad.org/pcm/schemas/v1",
+    "name": "Via Grid Placer",
+    "description": "Place vias in a grid pattern within selected copper zones",
+    "description_full": "A KiCad plugin that automatically places vias in a grid pattern within selected copper zones while respecting design rules. Features configurable grid spacing, stagger patterns, and DRC compliance checking.",
+    "identifier": "com.github.johannesvongrundherr.via-grid-placer",
+    "type": "plugin",
+    "author": {
+        "name": "Johannes von Grundherr",
+        "contact": {
+            "github": "https://github.com/johannesvongrundherr"
+        }
+    },
+    "maintainer": {
+        "name": "Johannes von Grundherr",
+        "contact": {
+            "github": "https://github.com/johannesvongrundherr"
+        }
+    },
+    "license": "MIT",
+    "resources": {
+        "homepage": "https://github.com/johannesvongrundherr/via-grid-placer"
+    },
+    "versions": [
+        {
+            "version": "1.0.0",
+            "status": "stable",
+            "kicad_version": "9.0"
+        }
+    ]
+}

@@ -9,4 +9,4 @@ from .via_grid_placer_action import ViaGridPlacerAction
 ViaGridPlacerAction().register()
 
 __version__ = "1.0.0"
-__author__ = "Johannes v."
+__author__ = "Johannes von Grundherr"
