@@ -298,7 +298,12 @@ class ViaGridGenerator:
         )
         
         # Generate unique ID
-        via.SetTimeStamp(int(uuid.uuid4().int & 0xFFFFFFFF))
+        # In KiCad v9, SetTimeStamp might not exist, try without it first
+        try:
+            via.SetTimeStamp(int(uuid.uuid4().int & 0xFFFFFFFF))
+        except AttributeError:
+            # Method doesn't exist in this KiCad version
+            pass
         
         return via
     
