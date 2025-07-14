@@ -19,7 +19,11 @@
         {
             "version": "1.0.0",
             "status": "stable",
-            "kicad_version": "9.0"
+            "kicad_version": "9.0",
+            "download_url": "https://github.com/Johannes-ece/kicad-auto-via/releases/download/v1.0.0/via-grid-generator-v1.0.0.zip",
+            "download_sha256": "465c5a4a1968c87c27b58f6b11d4c31372b21bf778fa199e3aa002a076fb38b2",
+            "download_size": 12452,
+            "install_size": 51200
         }
     ]
 }
