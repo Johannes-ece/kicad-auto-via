@@ -33,6 +33,7 @@ class ViaGridGeneratorAction(pcbnew.ActionPlugin):
         
         # Check in resources folder (PCM installation)
         icon_paths = [
+            os.path.join(plugin_dir, '..', 'resources', 'icon.png'),
             os.path.join(plugin_dir, '..', '..', 'resources', 'icon.png'),
             os.path.join(plugin_dir, 'icon.png'),
             os.path.join(plugin_dir, '..', 'icon.png')
