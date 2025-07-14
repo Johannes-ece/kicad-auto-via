@@ -184,7 +184,7 @@ class ViaGridDialog(wx.Dialog):
             max=5.0,
             inc=0.05
         )
-        self.clearance_ctrl.SetValue(0.2)
+        self.clearance_ctrl.SetValue(0.3)
         clear_grid.Add(self.clearance_ctrl, 1, wx.EXPAND)
         
         clear_grid.Add(

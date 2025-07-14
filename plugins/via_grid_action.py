@@ -96,6 +96,8 @@ class ViaGridGeneratorAction(pcbnew.ActionPlugin):
                 
                 # Create generator
                 generator = ViaGridGenerator(board, progress)
+                generator.min_clearance = params['min_clearance']
+                generator.via_to_via_clearance = params['via_to_via_spacing']
                 
                 try:
                     # Generate the via grid

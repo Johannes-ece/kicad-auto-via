@@ -69,6 +69,7 @@ class ViaGridGenerator:
             existing_vias = self._get_existing_vias()
             pads = self._get_all_pads()
             tracks = self._get_all_tracks()
+            zones = self._get_all_zones()
             
             # Generate grid positions
             self._update_progress("Calculating grid positions...", 20)
@@ -91,7 +92,7 @@ class ViaGridGenerator:
                 
                 # Check clearances
                 if self._check_clearances(pos, via_size, net.GetNetCode(),
-                                        existing_vias + new_vias, pads, tracks):
+                                        existing_vias + new_vias, pads, tracks, zones):
                     # Create and place via
                     via = self._create_via(pos, via_size, via_drill, net)
                     self.board.Add(via)
@@ -161,17 +162,44 @@ class ViaGridGenerator:
         return pads
     
     def _get_all_tracks(self):
-        """Get all track segments"""
+        """Get all track segments including arcs"""
         tracks = []
         for track in self.board.GetTracks():
-            if track.GetClass() == 'PCB_TRACK':
+            track_class = track.GetClass()
+            if track_class == 'PCB_TRACK':
                 tracks.append({
+                    'type': 'segment',
                     'start': track.GetStart(),
                     'end': track.GetEnd(),
                     'width': track.GetWidth(),
                     'net': track.GetNetCode()
                 })
+            elif track_class == 'PCB_ARC':
+                # For arcs, we need to check differently
+                tracks.append({
+                    'type': 'arc',
+                    'center': track.GetCenter(),
+                    'start': track.GetStart(),
+                    'end': track.GetEnd(),
+                    'width': track.GetWidth(),
+                    'net': track.GetNetCode(),
+                    'radius': track.GetRadius()
+                })
         return tracks
+    
+    def _get_all_zones(self):
+        """Get all copper zones"""
+        zones = []
+        for zone in self.board.Zones():
+            if zone.GetIsRuleArea():
+                # Skip rule areas (keepouts)
+                continue
+            zones.append({
+                'net': zone.GetNetCode(),
+                'layer': zone.GetLayer(),
+                'zone': zone
+            })
+        return zones
     
     def _generate_grid_positions(self, area, spacing):
         """Generate grid positions within the given area"""
@@ -214,7 +242,7 @@ class ViaGridGenerator:
         return bbox.Contains(pos)
     
     def _check_clearances(self, pos, via_size, net_code, 
-                         vias, pads, tracks):
+                         vias, pads, tracks, zones):
         """Check if via placement would violate clearances"""
         via_radius = via_size / 2
         min_clear = pcbnew.FromMM(self.min_clearance)
@@ -242,9 +270,17 @@ class ViaGridGenerator:
         # Check against tracks
         for track in tracks:
             if track['net'] != net_code:
-                dist = self._distance_to_segment(
-                    pos, track['start'], track['end']
-                )
+                if track['type'] == 'segment':
+                    dist = self._distance_to_segment(
+                        pos, track['start'], track['end']
+                    )
+                elif track['type'] == 'arc':
+                    dist = self._distance_to_arc(
+                        pos, track['center'], track['radius'], track['start'], track['end']
+                    )
+                else:
+                    continue
+                    
                 if dist < (via_radius + track['width']/2 + min_clear):
                     return False
         
@@ -281,6 +317,24 @@ class ViaGridGenerator:
         )
         
         return self._distance(pos, closest)
+    
+    def _distance_to_arc(self, pos, center, radius, start, end):
+        """Calculate distance from point to arc"""
+        # Distance from point to center
+        dist_to_center = self._distance(pos, center)
+        
+        # Check if point is within the arc's angular range
+        # This is a simplified check - for a full implementation,
+        # we'd need to check the angle of the point relative to the arc's start/end angles
+        
+        # For now, use a conservative approach: distance to arc is distance to center minus radius
+        dist_to_arc = abs(dist_to_center - radius)
+        
+        # Also check distance to arc endpoints
+        dist_to_start = self._distance(pos, start)
+        dist_to_end = self._distance(pos, end)
+        
+        return min(dist_to_arc, dist_to_start, dist_to_end)
     
     def _create_via(self, pos, size, drill, net):
         """Create a new via"""
