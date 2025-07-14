@@ -56,11 +56,11 @@ class ViaGridDialog(wx.Dialog):
         
         self.spacing_ctrl = wx.SpinCtrlDouble(
             grid_panel,
-            value="2.54",
             min=0.1,
             max=50.0,
             inc=0.1
         )
+        self.spacing_ctrl.SetValue(2.54)
         spacing_box.Add(self.spacing_ctrl, 1, wx.ALL | wx.EXPAND, 5)
         
         self.spacing_unit = wx.Choice(
@@ -85,11 +85,11 @@ class ViaGridDialog(wx.Dialog):
         )
         self.via_size_ctrl = wx.SpinCtrlDouble(
             grid_panel,
-            value="0.5",
             min=0.1,
             max=10.0,
             inc=0.05
         )
+        self.via_size_ctrl.SetValue(0.5)
         via_grid.Add(self.via_size_ctrl, 1, wx.EXPAND)
         
         # Drill size
@@ -100,11 +100,11 @@ class ViaGridDialog(wx.Dialog):
         )
         self.drill_size_ctrl = wx.SpinCtrlDouble(
             grid_panel,
-            value="0.3",
             min=0.1,
             max=10.0,
             inc=0.05
         )
+        self.drill_size_ctrl.SetValue(0.3)
         via_grid.Add(self.drill_size_ctrl, 1, wx.EXPAND)
         
         # Net selection
@@ -180,11 +180,11 @@ class ViaGridDialog(wx.Dialog):
         )
         self.clearance_ctrl = wx.SpinCtrlDouble(
             drc_panel,
-            value="0.2",
             min=0.0,
             max=5.0,
             inc=0.05
         )
+        self.clearance_ctrl.SetValue(0.2)
         clear_grid.Add(self.clearance_ctrl, 1, wx.EXPAND)
         
         clear_grid.Add(
@@ -194,11 +194,11 @@ class ViaGridDialog(wx.Dialog):
         )
         self.via_spacing_ctrl = wx.SpinCtrlDouble(
             drc_panel,
-            value="0.1",
             min=0.0,
             max=5.0,
             inc=0.05
         )
+        self.via_spacing_ctrl.SetValue(0.1)
         clear_grid.Add(self.via_spacing_ctrl, 1, wx.EXPAND)
         
         clear_box.Add(clear_grid, 0, wx.ALL | wx.EXPAND, 5)
