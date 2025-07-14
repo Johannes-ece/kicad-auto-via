@@ -8,20 +8,12 @@
     "author": {
         "name": "Johannes",
         "contact": {
-            "github": "https://github.com/Johannes-ece"
-        }
-    },
-    "maintainer": {
-        "name": "Johannes",
-        "contact": {
-            "github": "https://github.com/Johannes-ece"
+            "web": "https://github.com/Johannes-ece"
         }
     },
     "license": "MIT",
     "resources": {
-        "homepage": "https://github.com/Johannes-ece/kicad-auto-via",
-        "issues": "https://github.com/Johannes-ece/kicad-auto-via/issues",
-        "source": "https://github.com/Johannes-ece/kicad-auto-via"
+        "homepage": "https://github.com/Johannes-ece/kicad-auto-via"
     },
     "versions": [
         {
