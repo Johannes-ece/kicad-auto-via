@@ -3,7 +3,7 @@
     "name": "Via Grid Generator",
     "description": "Automatically place ground vias in a grid pattern with DRC compliance",
     "description_full": "A powerful KiCad plugin that automatically generates a grid of vias for ground plane stitching or thermal management. Features include:\n\n• Configurable grid spacing and via parameters\n• Automatic DRC compliance checking\n• Board outline detection\n• Clearance checking against pads, tracks, and existing vias\n• Support for custom net selection\n• Progress reporting for large grids\n• Proper handling of complex board shapes\n\nThe plugin intelligently avoids existing components and traces while maximizing via coverage within the board outline.",
-    "identifier": "com.github.johannes.via-grid-generator",
+    "identifier": "com.github.johannes.viagridgenerator",
     "type": "plugin",
     "author": {
         "name": "Johannes",
@@ -27,26 +27,7 @@
         {
             "version": "1.0.0",
             "status": "stable",
-            "kicad_version": "9.0",
-            "kicad_version_max": "9.99",
-            "download_url": "https://github.com/Johannes-ece/kicad-auto-via/releases/download/v1.0.0/via-grid-generator-v1.0.0.zip",
-            "download_size": 25600,
-            "download_sha256": "CALCULATE_AFTER_CREATING_ZIP",
-            "install_size": 51200,
-            "platforms": [
-                "windows",
-                "linux",
-                "macos"
-            ],
-            "tags": [
-                "pcb",
-                "via",
-                "ground",
-                "stitching",
-                "thermal",
-                "drc",
-                "automation"
-            ]
+            "kicad_version": "9.0"
         }
     ]
 }
